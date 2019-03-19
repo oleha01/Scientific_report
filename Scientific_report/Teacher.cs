@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ConsoleApp3
 {
     
-        class Teacher
+      public  class Teacher
         {
             public string PIB { get; set; }
             public string position { get; set; }
