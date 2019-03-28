@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scientific_report.Models
 {
-    public class Teacher
+    public class Teacher:IRole
     {
         public int Id { get; set; }
         public string SurName { get; set; }
@@ -19,7 +19,9 @@ namespace Scientific_report.Models
         public string Degree { get; set; }
         public int year_of_Protection { get; set; }
         public string Academic_status { get; set; }
-        public int year_of_Pssignment { get; set; }
+        public int Year_of_Assignment { get; set; }
+        public int CafedraId { get; set; }
+       virtual public Cafedra Cafedra { get; set; }
     }
     
 }
