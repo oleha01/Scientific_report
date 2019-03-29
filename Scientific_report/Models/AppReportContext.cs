@@ -16,6 +16,8 @@ namespace Scientific_report.Models
         public DbSet<Cafedra> Cafedras { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Title> Titles { get; set; }
         public AppReportContext(DbContextOptions<AppReportContext> options)
             : base(options)
         {

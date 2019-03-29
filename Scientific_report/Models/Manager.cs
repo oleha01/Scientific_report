@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 namespace Scientific_report.Models
 {
-    public class Work_User
+    public class Manager
     {
         public int Id { get; set; }
-        public int WorkId { get; set; }
-       virtual public Work Work { get; set; }
+        public string SurName { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
         public int UserId { get; set; }
-       virtual public Teacher Teacher { get; set; }
+       virtual public User User { get; set; }
     }
 }

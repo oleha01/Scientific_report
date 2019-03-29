@@ -10,6 +10,6 @@ namespace Scientific_report.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int FacultetId { get; set; }
-       virtual   public Facultet Facultet { get; set; }
+       virtual public Facultet Facultet { get; set; }
     }
 }

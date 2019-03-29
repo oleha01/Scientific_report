@@ -10,8 +10,8 @@ using Scientific_report.Models;
 namespace Scientific_report.Migrations
 {
     [DbContext(typeof(AppReportContext))]
-    [Migration("20190328214952_new_Table")]
-    partial class new_Table
+    [Migration("20190329091701_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,28 @@ namespace Scientific_report.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Scientific_report.Models.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Patronymic");
+
+                    b.Property<string>("SurName");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
+                });
 
             modelBuilder.Entity("Scientific_report.Models.Cafedra", b =>
                 {
@@ -51,6 +73,28 @@ namespace Scientific_report.Migrations
                     b.ToTable("Facultets");
                 });
 
+            modelBuilder.Entity("Scientific_report.Models.Manager", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Patronymic");
+
+                    b.Property<string>("SurName");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Managers");
+                });
+
             modelBuilder.Entity("Scientific_report.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
@@ -73,19 +117,60 @@ namespace Scientific_report.Migrations
 
                     b.Property<string>("SurName");
 
+                    b.Property<int>("UserId");
+
                     b.Property<int>("Year_of_Assignment");
+
+                    b.Property<int>("Year_of_Protection");
 
                     b.Property<int>("Year_of_birth");
 
                     b.Property<int>("Year_of_graduation");
 
-                    b.Property<int>("year_of_Protection");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CafedraId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("Scientific_report.Models.Title", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CafedraId");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Years");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CafedraId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Titles");
+                });
+
+            modelBuilder.Entity("Scientific_report.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Login");
+
+                    b.Property<string>("Password");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Scientific_report.Models.Work", b =>
@@ -113,15 +198,13 @@ namespace Scientific_report.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("TeacherId");
-
                     b.Property<int>("UserId");
 
                     b.Property<int>("WorkId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
+                    b.HasIndex("UserId");
 
                     b.HasIndex("WorkId");
 
@@ -141,6 +224,14 @@ namespace Scientific_report.Migrations
                     b.ToTable("WorkEnums");
                 });
 
+            modelBuilder.Entity("Scientific_report.Models.Admin", b =>
+                {
+                    b.HasOne("Scientific_report.Models.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("Scientific_report.Models.Admin", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Scientific_report.Models.Cafedra", b =>
                 {
                     b.HasOne("Scientific_report.Models.Facultet", "Facultet")
@@ -149,7 +240,28 @@ namespace Scientific_report.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Scientific_report.Models.Manager", b =>
+                {
+                    b.HasOne("Scientific_report.Models.User", "User")
+                        .WithOne("Manager")
+                        .HasForeignKey("Scientific_report.Models.Manager", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Scientific_report.Models.Teacher", b =>
+                {
+                    b.HasOne("Scientific_report.Models.Cafedra", "Cafedra")
+                        .WithMany()
+                        .HasForeignKey("CafedraId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Scientific_report.Models.User", "User")
+                        .WithOne("Teacher")
+                        .HasForeignKey("Scientific_report.Models.Teacher", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Scientific_report.Models.Title", b =>
                 {
                     b.HasOne("Scientific_report.Models.Cafedra", "Cafedra")
                         .WithMany()
@@ -167,9 +279,10 @@ namespace Scientific_report.Migrations
 
             modelBuilder.Entity("Scientific_report.Models.Work_User", b =>
                 {
-                    b.HasOne("Scientific_report.Models.Teacher", "Teacher")
+                    b.HasOne("Scientific_report.Models.User", "Users")
                         .WithMany()
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Scientific_report.Models.Work", "Work")
                         .WithMany()
