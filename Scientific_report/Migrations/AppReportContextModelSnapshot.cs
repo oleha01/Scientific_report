@@ -115,6 +115,8 @@ namespace Scientific_report.Migrations
 
                     b.Property<string>("SurName");
 
+                   
+
                     b.Property<int>("UserId");
 
                     b.Property<int>("Year_of_Assignment");
