@@ -15,5 +15,8 @@ namespace Scientific_report.Models
         virtual public Teacher Teacher { get; set; }
         virtual public Admin Admin { get; set; }
         virtual public Manager Manager { get; set; }
+        public void setPassword(string password) {
+            this.Password = password;
+        }
     }
 }

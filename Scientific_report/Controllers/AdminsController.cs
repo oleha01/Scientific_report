@@ -25,6 +25,13 @@ namespace Scientific_report.Controllers
             return RedirectToAction("Index");
 
         }
+        public RedirectToActionResult CreatePassword(string password,[Bind("Id,Login,Email,Password,RoleId,")] User user)
+        {
+            //_context.Teachers.Add(teacher);
+            user.setPassword(password);
+            _context.Users.Update(user);
+            return RedirectToAction("Index");
+        }
         // GET: Admins
         public async Task<IActionResult> Index()
         {
