@@ -18,6 +18,13 @@ namespace Scientific_report.Controllers
             _context = context;
         }
 
+        public RedirectToActionResult CreateTitle([Bind("Id,Text,CafedraId,Years")] Title title)
+        {
+            _context.Titles.Add(title);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
         // GET: Admins
         public async Task<IActionResult> Index()
         {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Scientific_report.Models;
 
 namespace Scientific_report.Migrations
 {
     [DbContext(typeof(AppReportContext))]
-    partial class AppReportContextModelSnapshot : ModelSnapshot
+    [Migration("20190425104256_r")]
+    partial class r
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,13 +200,15 @@ namespace Scientific_report.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("TeacherId");
+
                     b.Property<int>("UserId");
 
                     b.Property<int>("WorkId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("TeacherId");
 
                     b.HasIndex("WorkId");
 
@@ -279,10 +283,9 @@ namespace Scientific_report.Migrations
 
             modelBuilder.Entity("Scientific_report.Models.Work_User", b =>
                 {
-                    b.HasOne("Scientific_report.Models.Teacher", "User")
+                    b.HasOne("Scientific_report.Models.Teacher", "Teacher")
                         .WithMany("Work_Users")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TeacherId");
 
                     b.HasOne("Scientific_report.Models.Work", "Work")
                         .WithMany()

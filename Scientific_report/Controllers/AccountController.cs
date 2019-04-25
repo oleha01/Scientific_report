@@ -61,7 +61,7 @@ namespace AuthApp.Controllers
                     {
                         Email = model.Email,
                         Password = model.Password,
-                        Login = model.EnterpriseName + ".admin"
+                        Login = model.Email
                     };
                     await db.SaveChangesAsync();
 

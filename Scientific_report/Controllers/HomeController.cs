@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Scientific_report.Models;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace Scientific_report.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
