@@ -25,6 +25,13 @@ namespace Scientific_report.Controllers
             return RedirectToAction("Index");
 
         }
+        public RedirectToActionResult CreateCafedra([Bind("Id,Name,FacultedId")] Cafedra cafedra)
+        {
+            _context.Cafedras.Add(cafedra);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
         public RedirectToActionResult CreatePassword(string password,[Bind("Id,Login,Email,Password,RoleId,")] User user)
         {
             //_context.Teachers.Add(teacher);
@@ -32,6 +39,7 @@ namespace Scientific_report.Controllers
             _context.Users.Update(user);
             return RedirectToAction("Index");
         }
+
         // GET: Admins
         public async Task<IActionResult> Index()
         {
