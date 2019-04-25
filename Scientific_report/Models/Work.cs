@@ -9,7 +9,7 @@ namespace Scientific_report.Models
     {
         public int Id { get; set; }
         public int TypeId { get; set; }
-      virtual  public WorkEnum Type { get; set; }
+        virtual  public WorkEnum Type { get; set; }
         public DateTime Date { get; set; }
         public string Status { get; set; }
     }
