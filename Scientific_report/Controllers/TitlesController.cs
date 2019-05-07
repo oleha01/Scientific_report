@@ -9,28 +9,23 @@ using Scientific_report.Models;
 
 namespace Scientific_report.Controllers
 {
-    public class AdminsController : Controller
+    public class TitlesController : Controller
     {
         private readonly AppReportContext _context;
 
-        public AdminsController(AppReportContext context)
+        public TitlesController(AppReportContext context)
         {
             _context = context;
         }
-        public void CreateTitle(Title title)
-        {
 
-            
-        }
-
-        // GET: Admins
+        // GET: Titles
         public async Task<IActionResult> Index()
         {
-            var appReportContext = _context.Admins.Include(a => a.User);
+            var appReportContext = _context.Titles.Include(t => t.Cafedra);
             return View(await appReportContext.ToListAsync());
         }
 
-        // GET: Admins/Details/5
+        // GET: Titles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,42 +33,42 @@ namespace Scientific_report.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admins
-                .Include(a => a.User)
+            var title = await _context.Titles
+                .Include(t => t.Cafedra)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (admin == null)
+            if (title == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(title);
         }
 
-        // GET: Admins/Create
+        // GET: Titles/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["CafedraId"] = new SelectList(_context.Cafedras, "Id", "Id");
             return View();
         }
 
-        // POST: Admins/Create
+        // POST: Titles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SurName,Name,Patronymic,UserId")] Admin admin)
+        public async Task<IActionResult> Create([Bind("Id,Text,CafedraId,Years")] Title title)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(admin);
+                _context.Add(title);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", admin.UserId);
-            return View(admin);
+            ViewData["CafedraId"] = new SelectList(_context.Cafedras, "Id", "Id", title.CafedraId);
+            return View(title);
         }
 
-        // GET: Admins/Edit/5
+        // GET: Titles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,23 +76,23 @@ namespace Scientific_report.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admins.FindAsync(id);
-            if (admin == null)
+            var title = await _context.Titles.FindAsync(id);
+            if (title == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", admin.UserId);
-            return View(admin);
+            ViewData["CafedraId"] = new SelectList(_context.Cafedras, "Id", "Id", title.CafedraId);
+            return View(title);
         }
 
-        // POST: Admins/Edit/5
+        // POST: Titles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SurName,Name,Patronymic,UserId")] Admin admin)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Text,CafedraId,Years")] Title title)
         {
-            if (id != admin.Id)
+            if (id != title.Id)
             {
                 return NotFound();
             }
@@ -106,12 +101,12 @@ namespace Scientific_report.Controllers
             {
                 try
                 {
-                    _context.Update(admin);
+                    _context.Update(title);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdminExists(admin.Id))
+                    if (!TitleExists(title.Id))
                     {
                         return NotFound();
                     }
@@ -122,11 +117,11 @@ namespace Scientific_report.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", admin.UserId);
-            return View(admin);
+            ViewData["CafedraId"] = new SelectList(_context.Cafedras, "Id", "Id", title.CafedraId);
+            return View(title);
         }
 
-        // GET: Admins/Delete/5
+        // GET: Titles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,31 +129,31 @@ namespace Scientific_report.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admins
-                .Include(a => a.User)
+            var title = await _context.Titles
+                .Include(t => t.Cafedra)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (admin == null)
+            if (title == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(title);
         }
 
-        // POST: Admins/Delete/5
+        // POST: Titles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var admin = await _context.Admins.FindAsync(id);
-            _context.Admins.Remove(admin);
+            var title = await _context.Titles.FindAsync(id);
+            _context.Titles.Remove(title);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(int id)
+        private bool TitleExists(int id)
         {
-            return _context.Admins.Any(e => e.Id == id);
+            return _context.Titles.Any(e => e.Id == id);
         }
     }
 }

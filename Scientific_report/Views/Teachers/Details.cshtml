@@ -1,0 +1,96 @@
+﻿@model Scientific_report.Models.Teacher
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Teacher</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SurName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SurName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Chair)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Chair)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Year_of_birth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year_of_birth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Year_of_graduation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year_of_graduation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Degree)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Degree)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Year_of_Protection)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year_of_Protection)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Academic_status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Academic_status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Year_of_Assignment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year_of_Assignment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cafedra)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cafedra.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

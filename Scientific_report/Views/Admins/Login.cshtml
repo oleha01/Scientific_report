@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+@model Scientific_report.Models.Login.LoginModel
+
+@{
+    ViewBag.Title = "Log In";
+    Layout = "_Layout";
+}
+
+<h2>Log in</h2>
+
+<div asp-validation-summary="All" class="text-danger validation-summary-valid"></div>
+<h4>Use a local account to log in.</h4>
+<hr />
+<form asp-action="Login" method="post">
+    <div asp-validation-summary="ModelOnly" class="validate"></div>
+    <div class="row">
+        <div class="input-field col s6">
+            <input asp-for="UserName" type="text" class="validate">
+            <label asp-for="UserName"></label>
+            <span class="helper-text" asp-validation-for="UserName" data-error="" data-success=""></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <input asp-for="Password" type="password" class="validate">
+            <label asp-for="Password"></label>
+            <span class="helper-text" asp-validation-for="Password" data-error="" data-success=""></span>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col s7">
+            <input type="checkbox" class="filled-in" asp-for="RememberMe" />
+            <span>@Html.DisplayNameFor(model => model.RememberMe)</span>
+        </label>
+    </div>
+
+    <div class="row">
+        <input type="submit" value="Log In" class="waves-effect btn-small  waves-light" />
+        <a asp-action="Index" class="btn-small blue darken-3">Cancel</a>
+    </div>
+
+</form>
