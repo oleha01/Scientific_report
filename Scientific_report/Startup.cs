@@ -35,7 +35,14 @@ namespace Scientific_report
             });
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(options => //CookieAuthenticationOptions
+                {
+                   options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                   options.Cookie.HttpOnly = false;
+                   options.Cookie.SecurePolicy = CookieSecurePolicy.None;
 
+               });
             services.AddDbContext<AppReportContext>(options =>
                 options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

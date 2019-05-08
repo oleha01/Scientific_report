@@ -11,6 +11,6 @@ namespace Scientific_report.Models
         public int WorkId { get; set; }
        virtual public Work Work { get; set; }
         public int UserId { get; set; }
-       virtual public Teacher Teacher { get; set; }
+       virtual public Teacher User { get; set; }
     }
 }

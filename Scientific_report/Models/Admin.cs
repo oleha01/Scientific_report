@@ -12,6 +12,6 @@ namespace Scientific_report.Models
         public string Name { get; set; }
         public string Patronymic { get; set; }
         public int UserId { get; set; }
-       virtual public User User { get; set; }
+        virtual public User User { get; set; }
     }
 }

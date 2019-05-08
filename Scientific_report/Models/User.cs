@@ -11,8 +11,12 @@ namespace Scientific_report.Models
         public string Login { get; set; }
         public string Email { get; set; }
         public string Password { get; set;}
+        public int RoleId { get; set; }
         virtual public Teacher Teacher { get; set; }
         virtual public Admin Admin { get; set; }
         virtual public Manager Manager { get; set; }
+        public void setPassword(string password) {
+            this.Password = password;
+        }
     }
 }

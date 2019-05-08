@@ -21,7 +21,7 @@ namespace Scientific_report.Models
         public string Academic_status { get; set; }
         public int Year_of_Assignment { get; set; }
         public int CafedraId { get; set; }
-       virtual public Cafedra Cafedra { get; set; }
+        virtual public Cafedra Cafedra { get; set; }
         public int UserId { get; set; }
         virtual public User User { get; set; }
         virtual public List<Work_User> Work_Users { get; set; }
