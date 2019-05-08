@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Scientific_report.Models
 {
-    public class AppReportContext:DbContext
+    public class AppReportContext:IdentityDbContext<IdentityUser>
     {
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Work> Works { get; set; }
